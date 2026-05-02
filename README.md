@@ -1,28 +1,16 @@
-# TM3管理ツール
+## Git運用ルール
 
-## 概要
+### ブランチ構成
 
-未経験者やPCに慣れていない人でも使いやすい、シンプルなプロジェクト・タスク管理アプリです。
+- `main`：完成版・本番反映用
+- `develop`：開発中の作業を集めるブランチ
+- `feature/xxx`：各自の作業ブランチ
 
-## 主な機能
+### 基本の作業手順
 
-- ログイン
-- プロジェクト作成
-- タスク作成・編集・削除
-- ステータス管理
-- 担当者設定
-- カレンダー表示
-- カンバン表示
-- 簡易ガント表示
+作業を始めるときは、必ず `develop` を最新にしてから作業ブランチを作成します。
 
-## 技術構成
-
-- Frontend: Next.js / React / TypeScript / Tailwind CSS
-- Backend: Directus
-- Database: MySQL
-
-## ディレクトリ構成
-
-- frontend: 画面・UI
-- backend: Directus / DB関連
-- docs: 要件定義・設計資料
+```bash
+git switch develop
+git pull origin develop
+git switch -c feature/作業名
