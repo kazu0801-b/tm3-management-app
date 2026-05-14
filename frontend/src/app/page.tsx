@@ -5,10 +5,12 @@ export default function Home() {
   return (
     <main className="p-8">
       <h1 className="text-2xl font-bold">TM3管理ツール</h1>
-      <p className="mt-4">フロントエンド開発を開始しました。</p>
+      <p className="mt-4">タスク一覧の表示テストです。</p>
 
       <div className="mt-8">
-        <TaskCard task={mockTasks[0]}/>
+        {mockTasks.map((task) => (
+          <TaskCard key={task.id} task={task} />
+        ))}
       </div>
     </main>
   );
