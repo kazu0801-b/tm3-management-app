@@ -1,4 +1,5 @@
 import { TaskCard } from "@/components/organisms/TaskCard";
+import { TaskList } from "@/components/organisms/TaskList";
 import { mockTasks } from "@/data/mockTasks";
 
 export default function Home() {
@@ -8,9 +9,7 @@ export default function Home() {
       <p className="mt-4">タスク一覧の表示テストです。</p>
 
       <div className="mt-8">
-        {mockTasks.map((task) => (
-          <TaskCard key={task.id} task={task} />
-        ))}
+        <TaskList tasks={mockTasks} />
       </div>
     </main>
   );
