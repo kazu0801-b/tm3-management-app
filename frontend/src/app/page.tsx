@@ -1,13 +1,15 @@
 import { KanbanBoard } from "@/components/organisms/KanbanBoard";
+import { Navigation } from "@/components/organisms/Navigation";
 import { TaskCard } from "@/components/organisms/TaskCard";
 import { TaskList } from "@/components/organisms/TaskList";
 import { mockTasks } from "@/data/mockTasks";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <main className="p-8">
       <h1 className="text-2xl font-bold">TM3管理ツール</h1>
-      <p className="mt-4">タスク一覧の表示テストです。</p>
+      <Navigation />
 
       <section className="mt-8">
         <h2 className="text-xl font-bold">タスク一覧</h2>
