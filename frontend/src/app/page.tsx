@@ -1,5 +1,6 @@
 "use client";
 
+import { ErrorMessage } from "@/components/atoms/ErrorMessage";
 import { KanbanBoard } from "@/components/organisms/KanbanBoard";
 import { TaskForm } from "@/components/organisms/TaskForm";
 import { TaskList } from "@/components/organisms/TaskList";
@@ -44,6 +45,10 @@ export default function Home() {
     <main className="p-8">
       <section className="mt-8">
         <h2 className="text-2xl font-bold">タスク作成</h2>
+
+        <div className="mt-4">
+          <ErrorMessage message="タスク名と担当者を入力してください" />
+        </div>
 
         <div className="mt-4">
           <TaskForm onSubmit={handleAddTask} />
