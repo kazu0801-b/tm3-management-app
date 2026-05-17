@@ -3,10 +3,11 @@ import { KanbanBoard } from "@/components/organisms/KanbanBoard";
 import { TaskForm } from "@/components/organisms/TaskForm";
 import { TaskList } from "@/components/organisms/TaskList";
 import { mockTasks } from "@/data/mockTasks";
+import { Task } from "@/types/task";
 import { useState } from "react";
 
 export default function Home() {
-  const [tasks, setTasks] = useState(mockTasks);
+  const [tasks, setTasks] = useState<Task[]>(mockTasks);
   return(
     <main className="p-8">
       <section className="mt-8">
@@ -22,7 +23,7 @@ export default function Home() {
         
         
         <div className="mt-4">
-          <TaskList tasks={mockTasks} />
+          <TaskList tasks={tasks} />
           <KanbanBoard tasks={tasks} />
         </div>
       </section>
@@ -30,7 +31,7 @@ export default function Home() {
       <section>
         <h2 className="text-xl font-bold">カンバン</h2>
         <div className="mt-4">
-          <KanbanBoard tasks={mockTasks} />
+          <KanbanBoard tasks={tasks} />
         </div>
       </section>
     </main>
