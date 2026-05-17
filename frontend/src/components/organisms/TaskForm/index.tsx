@@ -3,16 +3,44 @@
 import { Button } from "@/components/atoms/Button";
 import { Input } from "@/components/atoms/Input";
 import { Select } from "@/components/atoms/Select";
-import { TaskStatus } from "@/types/task";
+import { Task, TaskStatus } from "@/types/task";
 import { useState } from "react";
 
-export const TaskForm = () => {
+type Props = {
+    onSubmit: (task: Task) => void;
+};
+
+export const TaskForm = ({ onSubmit}: Props) => {
     const [title, setTitle] = useState("");
     const [assignee, setAssignee] = useState("");
     const [status, setStatus] = useState<TaskStatus>("todo");
 
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        if (!title.trim() || !assignee.trim()) {
+            alert("タスク名と担当者を入力してください");
+            return;
+        }
+
+        const newTask: Task = {
+            id: Date.now(),
+            title,
+            assignee,
+            status,
+            startDate: "2026-05-01",
+            dueDate: "2026-05-31",
+        };
+
+        onSubmit(newTask);
+
+        setTitle("");
+        setAssignee("");
+        setStatus("todo");
+    };
+
     return (
-        <form className="grid max-w-md gap-4 rounded-lg border p-4">
+        <form className="grid max-w-md gap-4 rounded-lg border p-4" onSubmit={handleSubmit}>
             <Input 
                 label="タスク名"
                 value={title}
