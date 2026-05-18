@@ -4,6 +4,7 @@ import { ErrorMessage } from "@/components/atoms/ErrorMessage";
 import { KanbanBoard } from "@/components/organisms/KanbanBoard";
 import { TaskForm } from "@/components/organisms/TaskForm";
 import { TaskList } from "@/components/organisms/TaskList";
+import { AppLayout } from "@/components/templates/AppLayout";
 import { mockTasks } from "@/data/mockTasks";
 import { Task } from "@/types/task";
 import { useEffect, useState } from "react";
@@ -42,8 +43,8 @@ export default function Home() {
   };
 
   return (
-    <main className="p-8">
-      <section className="mt-8">
+    <AppLayout >
+      <section>
         <h2 className="text-2xl font-bold">タスク作成</h2>
 
         <div className="mt-4">
@@ -73,6 +74,6 @@ export default function Home() {
           <KanbanBoard tasks={tasks} />
         </div>
       </section>
-    </main>
+  </AppLayout>
   );
 }
