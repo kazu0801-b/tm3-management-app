@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [tasks, setTasks] = useState<Task[]>(mockTasks);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [searchKeyword, setSearchKeyWord ] = useState("");
 
   useEffect(() => {
     const savedTasks = localStorage.getItem("tasks");
@@ -42,6 +43,10 @@ export default function Home() {
     );
   };
 
+  const filteredTasks = tasks.filter((task)=>
+    task.title.includes(searchKeyword)
+  );
+
   return (
     <AppLayout >
       <section>
@@ -53,6 +58,28 @@ export default function Home() {
 
         <div className="mt-4">
           <TaskForm onSubmit={handleAddTask} />
+        </div>
+      </section>
+
+      <section className="mt-8">
+        <h2 className="text-xl font-bold">タスク一覧</h2>
+
+        <div className="mt-4">
+          <input 
+            type="text"
+            placeholder="タスクを検索"
+            value={searchKeyword}
+            onChange={(event) =>  
+              setSearchKeyWord(event.target.value)
+            }
+            className="w-full rounded-lg border px-4 py-2"
+            />
+        </div>
+
+        <div className="mt-4">
+          <TaskList
+          tasks={filteredTasks}
+          onDelete={handleDeleteTask} />
         </div>
       </section>
 
