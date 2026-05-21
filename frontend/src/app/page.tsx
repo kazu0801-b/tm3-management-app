@@ -12,7 +12,8 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [tasks, setTasks] = useState<Task[]>(mockTasks);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [searchKeyword, setSearchKeyWord ] = useState("");
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("all");
 
   useEffect(() => {
     const savedTasks = localStorage.getItem("tasks");
@@ -43,12 +44,17 @@ export default function Home() {
     );
   };
 
-  const filteredTasks = tasks.filter((task)=>
-    task.title.includes(searchKeyword)
-  );
+  const filteredTasks = tasks.filter((task) => {
+    const matchesKeyword = task.title.includes(searchKeyword);
+
+    const matchesStatus =
+      selectedStatus === "all" || task.status === selectedStatus;
+
+    return matchesKeyword && matchesStatus;
+  });
 
   return (
-    <AppLayout >
+    <AppLayout>
       <section>
         <h2 className="text-2xl font-bold">タスク作成</h2>
 
@@ -65,30 +71,55 @@ export default function Home() {
         <h2 className="text-xl font-bold">タスク一覧</h2>
 
         <div className="mt-4">
-          <input 
+          <input
             type="text"
             placeholder="タスクを検索"
             value={searchKeyword}
-            onChange={(event) =>  
-              setSearchKeyWord(event.target.value)
-            }
+            onChange={(event) => setSearchKeyword(event.target.value)}
             className="w-full rounded-lg border px-4 py-2"
-            />
+          />
+        </div>
+
+        <div className="mt-4 flex gap-2">
+          <button
+            className="rounded border px-3 py-1"
+            onClick={() => setSelectedStatus("all")}
+          >
+            すべて
+          </button>
+
+          <button
+            className="rounded border px-3 py-1"
+            onClick={() => setSelectedStatus("todo")}
+          >
+            未対応
+          </button>
+
+          <button
+            className="rounded border px-3 py-1"
+            onClick={() => setSelectedStatus("doing")}
+          >
+            対応中
+          </button>
+
+          <button
+            className="rounded border px-3 py-1"
+            onClick={() => setSelectedStatus("review")}
+          >
+            確認中
+          </button>
+
+          <button
+            className="rounded border px-3 py-1"
+            onClick={() => setSelectedStatus("done")}
+          >
+            対応済み
+          </button>
         </div>
 
         <div className="mt-4">
           <TaskList
-          tasks={filteredTasks}
-          onDelete={handleDeleteTask} />
-        </div>
-      </section>
-
-      <section className="mt-8">
-        <h2 className="text-xl font-bold">タスク一覧</h2>
-
-        <div className="mt-4">
-          <TaskList
-            tasks={tasks}
+            tasks={filteredTasks}
             onDelete={handleDeleteTask}
           />
         </div>
@@ -101,6 +132,6 @@ export default function Home() {
           <KanbanBoard tasks={tasks} />
         </div>
       </section>
-  </AppLayout>
+    </AppLayout>
   );
 }
