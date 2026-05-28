@@ -1,32 +1,36 @@
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 export const Sidebar = () => {
+    const pathname = usePathname();
+
+    const linkClass = (href: string) => {
+        const isActive = pathname === href;
+
+        return isActive ? "rounded-lg bg-blue-800 px-4 py-3 text-white transition" : "rounded-lg px-4 py-3 text-left transition hover:bg-zinc-800";
+    };
     return (
         <aside className="flex min-h-screen w-64 flex-col border-r bg-zinc-900 text-white">
-            <div className="flex min-h-screen w-64 flex-col border-r bg-zinc-900 text-white">
-                <h1 className="border-b border-zinc-800 p-6">
-                    TM3管理ツール
-                </h1>
-
-                <p className="mt-2 text-sm text-zinc-400">
-                    Project Management
-                </p>
+            <div className="border-b border-zinc-800 p-6">
+                <h1 className="text-2xl font-bold">TM3管理ツール</h1>
+                <p className="mt-2 text-sm text-zinc-400">Project Management</p>
             </div>
 
             <nav className="flex flex-1 flex-col gap-2 p-4">
-                <button className="rounded-lg bg-zinc-800 px-4 py-3 text-left transition hover:bg-zinc-700">
+                <Link href="/" className={linkClass("/")}>
                     タスク一覧
-                </button>
+                </Link>
 
-                <button className="rounded-lg px-4 py-3 text-left transition hover:bg-zinc-800">
-                    カレンダー
-                </button>
-
-                <button className="rounded-lg px-4 py-3 text-left transition hover:bg-zinc-800">
+                <Link href="/kanban" className={linkClass("/kanban")}>
                     カンバン
-                </button>
-                
-                <button className="rounded-lg px-4 py-3 text-left transition hover:bg-zinc-800">
+                </Link>
+
+                <Link href="/calender" className={linkClass("/calender")}>
+                    カレンダー
+                </Link>
+                <Link href="/gantt" className={linkClass("/gantt")}>
                     ガントチャート
-                </button>
+                </Link>
             </nav>
 
             <div className="border-t border-zinc-800 p-4">

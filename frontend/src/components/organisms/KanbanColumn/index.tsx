@@ -1,3 +1,4 @@
+"use client";
 import { Task, TaskStatus } from "@/types/task";
 import { TaskCard } from "../TaskCard";
 
