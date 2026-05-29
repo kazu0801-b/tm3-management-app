@@ -3,8 +3,8 @@
 import { ErrorMessage } from "@/components/atoms/ErrorMessage";
 import { KanbanBoard } from "@/components/organisms/KanbanBoard";
 import { TaskForm } from "@/components/organisms/TaskForm";
-import { TaskList } from "@/components/organisms/TaskList";
 import { AppLayout } from "@/components/templates/AppLayout";
+import { TaskTable } from "@/components/organisms/TaskTable";
 import { mockTasks } from "@/data/mockTasks";
 import { Task } from "@/types/task";
 import { useEffect, useState } from "react";
@@ -118,10 +118,7 @@ export default function Home() {
         </div>
 
         <div className="mt-4">
-          <TaskList
-            tasks={filteredTasks}
-            onDelete={handleDeleteTask}
-          />
+          <TaskTable tasks={filteredTasks}/>
         </div>
       </section>
 
