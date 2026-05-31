@@ -47,7 +47,7 @@ export const TaskTable = ({ tasks }: Props) => {
               <td className="px-4 py-4">
                 <Link
                   href={`/tasks/${task.id}`}
-                  className="inline-block rounded border px-3 py-1 text-sm"
+                  className="inline-block rounded bg-blue-600 px-3 py-1 text-sm font-bold text-white hover:bg-blue-700"
                 >
                   詳細
                 </Link>
