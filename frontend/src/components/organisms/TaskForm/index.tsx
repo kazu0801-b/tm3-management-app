@@ -40,7 +40,7 @@ export const TaskForm = ({ onSubmit}: Props) => {
     };
 
     return (
-        <form className="grid max-w-md gap-4 rounded-lg border p-4" onSubmit={handleSubmit}>
+        <form className="grid max-w-2xl gap-4 rounded-xl border bg-white p-6 shadow-sm" onSubmit={handleSubmit}>
             <Input 
                 label="タスク名"
                 value={title}
@@ -61,12 +61,13 @@ export const TaskForm = ({ onSubmit}: Props) => {
                 options={[
                     { label: "未対応", value: "todo"},
                     { label: "対応中", value: "doing"},
-                    { label: "確認中", value: "done"},
+                    { label: "確認中", value: "review"},
+                    { label: "対応済み", value: "done"},
                 ]}
                 onChange={(value) => setStatus(value as TaskStatus)}
             />
 
-            <div className="flex gap-2">
+            <div className="mt-2 flex justify-end gap-3">
                 <Button>登録</Button>
                 <Button variant="secondary">キャンセル</Button>      
             </div>

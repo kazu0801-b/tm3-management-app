@@ -53,8 +53,19 @@ export default function Home() {
     return matchesKeyword && matchesStatus;
   });
 
+
+  const statusButtonClass = (status: string) => {
+    const isActive = selectedStatus === status;
+
+    return isActive ? "rounded-lg bg-blue-600 px-4 py-2 text-sm font-bold text-white" : "rounded-lg border px-4 py-2 text-sm text-zinc-600 hover:bg-zinc-50";
+  };
+
   return (
     <AppLayout>
+      <div  className="mb-8">
+        <h1 className="text-3xl font-bold">タスク管理</h1>
+        <p className="mt-2 text-zinc-500">タスクを管理できます。</p>
+      </div>
       <section>
         <h2 className="text-2xl font-bold">タスク作成</h2>
 
@@ -68,51 +79,40 @@ export default function Home() {
       </section>
 
       <section className="mt-8">
-        <h2 className="text-xl font-bold">タスク一覧</h2>
-
-        <div className="mt-4">
-          <input
-            type="text"
-            placeholder="タスクを検索"
-            value={searchKeyword}
-            onChange={(event) => setSearchKeyword(event.target.value)}
-            className="w-full rounded-lg border px-4 py-2"
-          />
+        <div className="mb-4">
+          <h2 className="text-xl font-bold">タスク一覧</h2>
+          <p className="mt-1 text-sm text-zinc-500">
+            登録されているタスクを確認できます。
+          </p>
         </div>
 
+        <div className="rounded-xl border bg-white p-4 shadow-sm">
+          <input
+           type="text"
+           placeholder="タスクを検索"
+           value={searchKeyword}
+           onChange={(event) => setSearchKeyword(event.target.value)}
+           className="w-full rounded-lg border px-4 py-2 "/>
+        
+
         <div className="mt-4 flex gap-2">
-          <button
-            className="rounded border px-3 py-1"
-            onClick={() => setSelectedStatus("all")}
-          >
+          <button className={statusButtonClass("all")} onClick={() => setSelectedStatus("all")}>
             すべて
           </button>
 
-          <button
-            className="rounded border px-3 py-1"
-            onClick={() => setSelectedStatus("todo")}
-          >
-            未対応
+          <button className={statusButtonClass("todo")} onClick={() => setSelectedStatus("todo")}>
+           未対応
           </button>
 
-          <button
-            className="rounded border px-3 py-1"
-            onClick={() => setSelectedStatus("doing")}
-          >
+          <button className={statusButtonClass("doing")} onClick={() => setSelectedStatus("doing")}>
             対応中
           </button>
 
-          <button
-            className="rounded border px-3 py-1"
-            onClick={() => setSelectedStatus("review")}
-          >
+          <button className={statusButtonClass("review")} onClick={() => setSelectedStatus("review")}>
             確認中
           </button>
 
-          <button
-            className="rounded border px-3 py-1"
-            onClick={() => setSelectedStatus("done")}
-          >
+          <button className={statusButtonClass("done")} onClick={() => setSelectedStatus("done")}>
             対応済み
           </button>
         </div>
@@ -120,6 +120,7 @@ export default function Home() {
         <div className="mt-4">
           <TaskTable tasks={filteredTasks}/>
         </div>
+      </div>
       </section>
 
       <section className="mt-12">

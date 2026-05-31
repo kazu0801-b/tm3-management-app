@@ -7,10 +7,10 @@ type Props = {
 
 export const TaskTable = ({tasks}: Props) => {
     return (
-        <div className="overflow-hidden rounded-xl border">
-            <table className="w-full border-collapse bg-white">
+        <div className="overflow-hidden rounded-xl border bg-white shadow-sm">
+            <table className="w-full border-collapse text-sm">
                 <thead className="bg-zinc-50">
-                    <tr className="text-left text-sm text-zinc-500">
+                    <tr className="text-left text-xs font-bold uppercase text-zinc-500">
                         <th className="px-4 py-3">ID</th>
                         <th className="px-4 py-3">タスク名</th>
                         <th className="px-4 py-3">ステータス</th>
@@ -22,7 +22,7 @@ export const TaskTable = ({tasks}: Props) => {
 
                 <tbody>
                     {tasks.map((task) => (
-                        <tr key={task.id} className="border-t">
+                        <tr key={task.id} className="border-t hover:bg-zinc-50">
                             <td className="px-4 py-4 text-sm text-zinc-500">
                                 No.{task.id}
                             </td>

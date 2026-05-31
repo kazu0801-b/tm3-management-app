@@ -8,3 +8,18 @@ export type Task = {
     startDate: string;
     dueDate: string;
 };
+
+export type DirectusTask = {
+    id: number;
+    projectId: number;
+    title: string;
+    description?: string;
+    statusId: number;
+    assigneeId: string;
+    startDate?: string;
+    dueDate: string;
+    createdBy: string;
+    createdAt: string;
+    updatedAt: string;
+
+} 
