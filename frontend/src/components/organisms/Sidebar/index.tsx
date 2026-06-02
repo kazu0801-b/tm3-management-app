@@ -25,7 +25,7 @@ export const Sidebar = () => {
                     カンバン
                 </Link>
 
-                <Link href="/calender" className={linkClass("/calender")}>
+                <Link href="/calendar" className={linkClass("/calendar")}>
                     カレンダー
                 </Link>
                 <Link href="/gantt" className={linkClass("/gantt")}>
