@@ -10,8 +10,8 @@ export type Project = {
 export type ProjectMemberRole = "管理者"| "メンバー";
 
 export type ProjectMember = {
-    id: number;
-    projectId: number;
+    id: string;
+    projectId: string;
     userId: string;
     memberRole: ProjectMemberRole;
 };
