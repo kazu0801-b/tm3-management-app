@@ -1,5 +1,8 @@
+"use client";
+
 import { AppLayout } from "@/components/templates/AppLayout";
 import { mockTasks } from "@/data/mockTasks";
+import { useState } from "react";
 
 const days = [
   "30", "1", "2", "3", "4", "5", "6",
@@ -10,6 +13,16 @@ const days = [
 ];
 
 const CalendarPage = () => {
+  const [viewMode, setViewMode] = useState("month");
+
+  const viewButtonClass = (mode: string) => {
+    const isActive = viewMode === mode;
+
+    return isActive
+      ? "rounded border bg-blue-600 px-3 py-1 text-sm text-white"
+      : "rounded border px-3 py-1 text-sm hover:bg-zinc-50";
+  };
+
   return (
     <AppLayout>
       <div className="mb-6 flex items-center justify-between">
@@ -27,53 +40,85 @@ const CalendarPage = () => {
 
       <div className="rounded-xl border bg-white p-4 shadow-sm">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-xl font-bold">2026年 6月</h2>
+          <div>
+            <h2 className="text-xl font-bold">2026年 6月</h2>
+            <p className="text-sm text-zinc-500">
+              現在の表示:
+              {viewMode === "month" && "月表示"}
+              {viewMode === "week" && "週表示"}
+              {viewMode === "day" && "日表示"}
+            </p>
+          </div>
 
           <div className="flex gap-2">
-            <button className="rounded border px-3 py-1 text-sm">月</button>
-            <button className="rounded border px-3 py-1 text-sm">週</button>
-            <button className="rounded border px-3 py-1 text-sm">日</button>
+            <button
+              className={viewButtonClass("month")}
+              onClick={() => setViewMode("month")}
+            >
+              月
+            </button>
+            <button
+              className={viewButtonClass("week")}
+              onClick={() => setViewMode("week")}
+            >
+              週
+            </button>
+            <button
+              className={viewButtonClass("day")}
+              onClick={() => setViewMode("day")}
+            >
+              日
+            </button>
           </div>
         </div>
 
-        <div className="grid grid-cols-7 border-l border-t">
-          {["日", "月", "火", "水", "木", "金", "土"].map((day) => (
-            <div
-              key={day}
-              className="border-b border-r bg-zinc-50 p-3 text-center text-sm font-bold"
-            >
-              {day}
-            </div>
-          ))}
-
-          {days.map((day, index) => {
-            const date = `2026-06-${day.padStart(2, "0")}`;
-
-            const tasksForDay = mockTasks.filter(
-              (task) => task.dueDate === date
-            );
-
-            return (
-              <div
-                key={`${day}-${index}`}
-                className="min-h-28 border-b border-r p-2 text-sm"
-              >
-                <p className="font-bold">{day}</p>
-
-                <div className="mt-1 space-y-1">
-                  {tasksForDay.map((task) => (
-                    <div
-                      key={task.id}
-                      className="rounded bg-blue-100 p-1 text-xs text-blue-700"
-                    >
-                      {task.title}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
+        <div className="mb-4 rounded-lg bg-zinc-50 p-3 text-sm text-zinc-600">
+          {viewMode === "month" &&
+            "月表示では、1ヶ月分のタスク期限を確認できます。"}
+          {viewMode === "week" && "週表示は今後実装予定です。"}
+          {viewMode === "day" && "日表示は今後実装予定です。"}
         </div>
+
+        {viewMode === "month" && (
+          <div className="grid grid-cols-7 border-l border-t">
+            {["日", "月", "火", "水", "木", "金", "土"].map((day) => (
+              <div
+                key={day}
+                className="border-b border-r bg-zinc-50 p-3 text-center text-sm font-bold"
+              >
+                {day}
+              </div>
+            ))}
+
+            {days.map((day, index) => {
+              const date = `2026-06-${day.padStart(2, "0")}`;
+
+              const tasksForDay = mockTasks.filter(
+                (task) => task.dueDate === date
+              );
+
+              return (
+                <div
+                  key={`${day}-${index}`}
+                  className="min-h-28 border-b border-r p-2 text-sm"
+                >
+                  <p className="font-bold">{day}</p>
+
+                  <div className="mt-1 space-y-1">
+                    {tasksForDay.map((task) => (
+                      <div
+                        key={task.id}
+                        className="rounded bg-blue-100 p-1 text-xs text-blue-700"
+                      >
+                        {task.title}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </AppLayout>
   );
