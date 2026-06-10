@@ -10,8 +10,8 @@ export type Task = {
 };
 
 export type DirectusTask = {
-    id: number;
-    projectId: number;
+    id: string;
+    projectId: string;
     title: string;
     description?: string;
     statusId: number;
@@ -23,3 +23,26 @@ export type DirectusTask = {
     updatedAt: string;
 
 } 
+
+export type TaskListItem = {
+    id: string;
+    projectId: string;
+    title: string;
+    description?: string;
+    statusId: number;
+    assigneeName: string;
+    startDate?: string;
+    dueDate: string;
+    createdBy: string;
+    createdAt: string;
+    updatedAt: string; 
+};
+
+export type CreateTaskRequest = {
+    projectId: string;
+    title: string;
+    description?: string;
+    statusId?: string;
+    startDate: string;
+    dueDate: string; 
+};
