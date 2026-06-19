@@ -2,16 +2,16 @@ import { Task } from "@/types/task";
 import { KanbanColumn } from "../KanbanColumn";
 
 type Props = {
-    tasks: Task[];
+  tasks: Task[];
 };
 
-export const KanbanBoard = ({tasks}: Props) => {
-    return (
-        <div className="grid gap-4 md:grid-cols-4">
-            <KanbanColumn title="未対応" status="todo" tasks={tasks} />
-            <KanbanColumn title="対応中" status="doing" tasks={tasks} />
-            <KanbanColumn title="確認中" status="review" tasks={tasks}/>
-            <KanbanColumn title="対応済み" status="done" tasks={tasks}/>
-        </div>
-    );
+export const KanbanBoard = ({ tasks }: Props) => {
+  return (
+    <div className="grid gap-4 md:grid-cols-4">
+      <KanbanColumn title="未対応" status="todo" tasks={tasks} />
+      <KanbanColumn title="対応中" status="doing" tasks={tasks} />
+      <KanbanColumn title="確認中" status="review" tasks={tasks} />
+      <KanbanColumn title="対応済み" status="done" tasks={tasks} />
+    </div>
+  );
 };

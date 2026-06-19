@@ -10,12 +10,7 @@ type Props = {
   onChange: (value: string) => void;
 };
 
-export const Select = ({
-  label,
-  value,
-  options,
-  onChange,
-}: Props) => {
+export const Select = ({ label, value, options, onChange }: Props) => {
   return (
     <label className="grid gap-2">
       <span className="font-bold">{label}</span>

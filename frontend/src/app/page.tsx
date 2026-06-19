@@ -32,16 +32,11 @@ export default function Home() {
   }, [tasks, isLoaded]);
 
   const handleAddTask = (newTask: Task) => {
-    setTasks((previousTasks) => [
-      newTask,
-      ...previousTasks,
-    ]);
+    setTasks((previousTasks) => [newTask, ...previousTasks]);
   };
 
   const handleDeleteTask = (id: number) => {
-    setTasks((previousTasks) =>
-      previousTasks.filter((task) => task.id !== id)
-    );
+    setTasks((previousTasks) => previousTasks.filter((task) => task.id !== id));
   };
 
   const filteredTasks = tasks.filter((task) => {
@@ -53,16 +48,17 @@ export default function Home() {
     return matchesKeyword && matchesStatus;
   });
 
-
   const statusButtonClass = (status: string) => {
     const isActive = selectedStatus === status;
 
-    return isActive ? "rounded-lg bg-blue-600 px-4 py-2 text-sm font-bold text-white" : "rounded-lg border px-4 py-2 text-sm text-zinc-600 hover:bg-zinc-50";
+    return isActive
+      ? "rounded-lg bg-blue-600 px-4 py-2 text-sm font-bold text-white"
+      : "rounded-lg border px-4 py-2 text-sm text-zinc-600 hover:bg-zinc-50";
   };
 
   return (
     <AppLayout>
-      <div  className="mb-8">
+      <div className="mb-8">
         <h1 className="text-3xl font-bold">タスク管理</h1>
         <p className="mt-2 text-zinc-500">タスクを管理できます。</p>
       </div>
@@ -88,39 +84,54 @@ export default function Home() {
 
         <div className="rounded-xl border bg-white p-4 shadow-sm">
           <input
-           type="text"
-           placeholder="タスクを検索"
-           value={searchKeyword}
-           onChange={(event) => setSearchKeyword(event.target.value)}
-           className="w-full rounded-lg border px-4 py-2 "/>
-        
+            type="text"
+            placeholder="タスクを検索"
+            value={searchKeyword}
+            onChange={(event) => setSearchKeyword(event.target.value)}
+            className="w-full rounded-lg border px-4 py-2 "
+          />
 
-        <div className="mt-4 flex gap-2">
-          <button className={statusButtonClass("all")} onClick={() => setSelectedStatus("all")}>
-            すべて
-          </button>
+          <div className="mt-4 flex gap-2">
+            <button
+              className={statusButtonClass("all")}
+              onClick={() => setSelectedStatus("all")}
+            >
+              すべて
+            </button>
 
-          <button className={statusButtonClass("todo")} onClick={() => setSelectedStatus("todo")}>
-           未対応
-          </button>
+            <button
+              className={statusButtonClass("todo")}
+              onClick={() => setSelectedStatus("todo")}
+            >
+              未対応
+            </button>
 
-          <button className={statusButtonClass("doing")} onClick={() => setSelectedStatus("doing")}>
-            対応中
-          </button>
+            <button
+              className={statusButtonClass("doing")}
+              onClick={() => setSelectedStatus("doing")}
+            >
+              対応中
+            </button>
 
-          <button className={statusButtonClass("review")} onClick={() => setSelectedStatus("review")}>
-            確認中
-          </button>
+            <button
+              className={statusButtonClass("review")}
+              onClick={() => setSelectedStatus("review")}
+            >
+              確認中
+            </button>
 
-          <button className={statusButtonClass("done")} onClick={() => setSelectedStatus("done")}>
-            対応済み
-          </button>
+            <button
+              className={statusButtonClass("done")}
+              onClick={() => setSelectedStatus("done")}
+            >
+              対応済み
+            </button>
+          </div>
+
+          <div className="mt-4">
+            <TaskTable tasks={filteredTasks} />
+          </div>
         </div>
-
-        <div className="mt-4">
-          <TaskTable tasks={filteredTasks}/>
-        </div>
-      </div>
       </section>
 
       <section className="mt-12">
