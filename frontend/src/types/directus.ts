@@ -6,5 +6,5 @@ export type DirectusUser = {
 
 export type DirectusRole = {
     id: string;
-    name: "管理者": "メンバー";
+    name: "管理者"| "メンバー";
 }

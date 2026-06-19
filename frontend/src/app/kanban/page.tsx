@@ -8,7 +8,7 @@ export default function KanbanPage() {
     <AppLayout>
       <h1 className="text-2xl font-bold">カンバン</h1>
       <Navigation />
-      
+
       <p className="mt-2 text-gray-600">
         ステータスごとにタスクを確認できます。
       </p>

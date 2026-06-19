@@ -13,9 +13,7 @@ type Props = {
 const RootLayout = ({ children }: Props) => {
   return (
     <html lang="ja">
-      <body>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 };

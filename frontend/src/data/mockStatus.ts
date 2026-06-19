@@ -1,6 +1,5 @@
 import { Status } from "@/types/Status";
 
-
 export const mockStatuses: Status[] = [
   {
     id: 1,

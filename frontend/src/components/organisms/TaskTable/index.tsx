@@ -24,25 +24,17 @@ export const TaskTable = ({ tasks }: Props) => {
         <tbody>
           {tasks.map((task) => (
             <tr key={task.id} className="border-t">
-              <td className="px-4 py-4 text-sm text-zinc-500">
-                No.{task.id}
-              </td>
+              <td className="px-4 py-4 text-sm text-zinc-500">No.{task.id}</td>
 
-              <td className="px-4 py-4 font-bold">
-                {task.title}
-              </td>
+              <td className="px-4 py-4 font-bold">{task.title}</td>
 
               <td className="px-4 py-4">
                 <StatusBadge status={task.status} />
               </td>
 
-              <td className="px-4 py-4">
-                {task.assignee}
-              </td>
+              <td className="px-4 py-4">{task.assignee}</td>
 
-              <td className="px-4 py-4">
-                {task.dueDate}
-              </td>
+              <td className="px-4 py-4">{task.dueDate}</td>
 
               <td className="px-4 py-4">
                 <Link
