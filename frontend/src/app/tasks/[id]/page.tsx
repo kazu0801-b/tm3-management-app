@@ -1,7 +1,7 @@
 "use client";
 
 import { AppLayout } from "@/components/templates/AppLayout";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { mockTasks } from "@/data/mockTasks";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -9,6 +9,7 @@ import { Task } from "@/types/task";
 
 const TaskDetailPage = () => {
   const params = useParams();
+  const router = useRouter();
 
   const taskId = params.id;
 
@@ -61,6 +62,19 @@ const TaskDetailPage = () => {
     );
   }
 
+  const handleDelete = () => {
+    const isConfirmed = window.confirm("このタスクを削除いたしますか？");
+
+    if (!isConfirmed) return;
+
+    const updatedTasks = tasks.filter((taskItem) => taskItem.id !== task.id);
+
+    setTasks(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+
+    router.push("/");
+  };
+
   return (
     <AppLayout>
       <Link
@@ -71,13 +85,21 @@ const TaskDetailPage = () => {
       </Link>
       <div>
         <h1 className="text-3xl font-bold">タスク詳細</h1>
-
-        <Link
-          href={`/tasks/${task.id}/edit`}
-          className="rounded bg-blue-600 px-4 py-2 text-sm font-bold text-white hover:bg-clue-700"
-        >
-          編集
-        </Link>
+        <div className="flex gap-2">
+          <Link
+            href={`/tasks/${task.id}/edit`}
+            className="rounded bg-blue-600 px-4 py-2 text-sm font-bold text-white hover:bg-clue-700"
+          >
+            編集
+          </Link>
+          <button
+            type="button"
+            onClick={handleDelete}
+            className="rounded bg-red-600 px-4 py-2 text-sm font-bold text-white hover:bg-red-700"
+          >
+            削除
+          </button>
+        </div>
       </div>
 
       <div className="mt-6 rounded-xl border bg-white p-6 shadow-sm">
