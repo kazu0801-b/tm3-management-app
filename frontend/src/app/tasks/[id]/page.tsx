@@ -69,7 +69,16 @@ const TaskDetailPage = () => {
       >
         一覧へ戻る
       </Link>
-      <h1 className="text-3xl font-bold">タスク詳細</h1>
+      <div>
+        <h1 className="text-3xl font-bold">タスク詳細</h1>
+
+        <Link
+          href={`/tasks/${task.id}/edit`}
+          className="rounded bg-blue-600 px-4 py-2 text-sm font-bold text-white hover:bg-clue-700"
+        >
+          編集
+        </Link>
+      </div>
 
       <div className="mt-6 rounded-xl border bg-white p-6 shadow-sm">
         <p className="text-sm text-zinc-500">タスク名</p>
