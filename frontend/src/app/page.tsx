@@ -138,7 +138,7 @@ export default function Home() {
         <h2 className="text-xl font-bold">カンバン</h2>
 
         <div className="mt-4">
-          <KanbanBoard tasks={tasks} />
+          <KanbanBoard tasks={tasks} onDelete={handleDeleteTask}/>
         </div>
       </section>
     </AppLayout>
