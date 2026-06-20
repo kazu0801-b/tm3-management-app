@@ -6,9 +6,10 @@ type Props = {
   title: string;
   status: TaskStatus;
   tasks: Task[];
+  onDelete: (id: number) => void;
 };
 
-export const KanbanColumn = ({ title, status, tasks }: Props) => {
+export const KanbanColumn = ({ title, status, tasks, onDelete }: Props) => {
   const filteredTasks = tasks.filter((tasks) => tasks.status === status);
 
   return (
@@ -19,7 +20,7 @@ export const KanbanColumn = ({ title, status, tasks }: Props) => {
 
       <div>
         {filteredTasks.map((task) => (
-          <TaskCard key={task.id} task={task} />
+          <TaskCard key={task.id} task={task} onDelete={onDelete} />
         ))}
       </div>
     </section>
