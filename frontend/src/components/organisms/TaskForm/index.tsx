@@ -14,12 +14,14 @@ export const TaskForm = ({ onSubmit }: Props) => {
   const [title, setTitle] = useState("");
   const [assignee, setAssignee] = useState("");
   const [status, setStatus] = useState<TaskStatus>("todo");
+  const [startDate, setStartDate] = useState("");
+  const [dueDate, setDueDate] = useState("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!title.trim() || !assignee.trim()) {
-      alert("タスク名と担当者を入力してください");
+    if (!title.trim() || !assignee.trim() || !startDate.trim()) {
+      alert("タスク名、担当者、開始日、期限日を入力してください");
       return;
     }
 
@@ -28,8 +30,8 @@ export const TaskForm = ({ onSubmit }: Props) => {
       title,
       assignee,
       status,
-      startDate: "2026-05-01",
-      dueDate: "2026-05-31",
+      startDate,
+      dueDate,
     };
 
     onSubmit(newTask);
@@ -37,6 +39,8 @@ export const TaskForm = ({ onSubmit }: Props) => {
     setTitle("");
     setAssignee("");
     setStatus("todo");
+    setStartDate("");
+    setDueDate("");
   };
 
   return (
@@ -69,6 +73,26 @@ export const TaskForm = ({ onSubmit }: Props) => {
         ]}
         onChange={(value) => setStatus(value as TaskStatus)}
       />
+
+      <label className="block">
+        <span className="text-sm font-bold text-zinc-700">開始日</span>
+        <input
+          type="date"
+          value={startDate}
+          onChange={(event) => setStartDate(event.target.value)}
+          className="mt-1 w-full rounded-lg border px-4 py-2"
+        />
+      </label>
+
+      <label className="block">
+        <span className="text-sm font-bold text-zinc-700">期限日</span>
+        <input
+          type="date"
+          value={dueDate}
+          onChange={(event) => setDueDate(event.target.value)}
+          className="mt-1 w-full rounded-lg border px-4 py-2"
+        />
+      </label>
 
       <div className="mt-2 flex justify-end gap-3">
         <Button>登録</Button>
